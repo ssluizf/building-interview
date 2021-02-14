@@ -1,7 +1,13 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
-    :root {
-        --color-sky: #333333;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: ${props => props.theme.colors.sky};
     }
 `
