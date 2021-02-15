@@ -9,7 +9,6 @@ declare module 'styled-components' {
             building_primary: string;
             building_secondary: string;
 
-            glass: string;
             sky: string;
         }
     }

@@ -1,4 +1,4 @@
-export default {
+const day = {
   title: "day",
 
   colors: {
@@ -6,7 +6,8 @@ export default {
     building_primary: "#FFDDD2",
     building_secondary: "#E29578",
 
-    glass: "#EDF6F9",
     sky: "#83C5BE",
   },
 };
+
+export default day

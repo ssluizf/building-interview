@@ -9,5 +9,6 @@ export default createGlobalStyle`
 
     body {
         background: ${props => props.theme.colors.sky};
+        overflow-x: hidden;
     }
 `

@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
-import { Container, Wall, Roof, Flats, Hall, Window, Switch, Door, Platform } from '../../styles/components/Building';
+import Media from 'react-media';
+import bulb from '../../assets/bulb.svg'
+
+import { Container, BuildingContainer, Switch, Wall, Roof, Flats, Hall, Tile, Window, Door, Platform, Street } from '../../styles/components/Building';
 
 interface WindowProps {
   turn: boolean;
@@ -9,6 +12,7 @@ interface WindowProps {
 const Building: React.FC = () => {
   const [windows, setWindows] = useState<[WindowProps]>([{ turn: false }])
   const windowsTotal = 12
+  const windowsOn: boolean = windows.filter(w => w.turn).length === windowsTotal
 
   useEffect(() => {
     const booleanArray: any = new Array(windowsTotal)
@@ -16,9 +20,7 @@ const Building: React.FC = () => {
   }, [])
 
   function toggleLights() {
-    const windowsOn = windows.filter(window => window.turn)
-
-    if (windowsOn.length === windowsTotal) {
+    if (windowsOn) {
       const setWindowsOff: any = windows.map(() => {
         return { turn: false }
       })
@@ -40,25 +42,37 @@ const Building: React.FC = () => {
     setWindows(windowsState)
   }
 
-  function mappingWindows(window: any, i: number) {
-    return <Window key={i} turn={window.turn} onClick={() => toggleLight(i)} />
+  function mappingWindows(w: any, i: number) {
+    return <Window key={i} turn={w.turn} onClick={() => toggleLight(i)} />
   }
 
   return (
     <Container>
-      <Wall>
-        <Roof />
-        <Flats>
-          {windows.map(mappingWindows)}
-        </Flats>
-        <Hall>
-          <Door />
-          <Platform />
-        </Hall>
-      </Wall>
+      <BuildingContainer>
+        <Wall>
+          <Roof>
+            <Tile />
+          </Roof>
+          <Flats>
+            {windows.map(mappingWindows)}
+          </Flats>
+          <Hall>
+            <Door />
+          </Hall>
+        </Wall>
+        <Platform />
+      </BuildingContainer>
       <Switch onClick={() => toggleLights()}>
-        Turn on
+        <Media queries={{ medium: '(max-width: 768px)', large: "(min-width: 768px" }}>
+          {matches => (
+            <>
+              {matches.medium && <img src={bulb} alt='bulb' />}
+              {matches.large && 'Turn ' + (windowsOn ? 'off' : 'on')}
+            </>
+          )}
+        </Media>
       </Switch>
+      <Street />
     </Container>
   );
 }

@@ -1,4 +1,4 @@
-export default {
+const night = {
   title: "night",
 
   colors: {
@@ -6,7 +6,8 @@ export default {
     building_primary: "#FFDDD2",
     building_secondary: "#E29578",
 
-    glass: "#EDF6F9",
     sky: "#006D77",
   },
 };
+
+export default night
